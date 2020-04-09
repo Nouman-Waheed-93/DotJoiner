@@ -1,0 +1,66 @@
+UnityPackageManager/
+.vs/
+Library/
+Packages/
+ProjectSettings/
+Temp/
+Assets/Resources/
+Assets/prefab/
+Assets/Scene/
+Assets/Fonts/
+Assets/Material/
+Assets/Sprits/
+Assets/Join The Dots - Design/
+Assets/PlayServicesResolver/
+Assets/FacebookSDK/
+Assets/Plugins/
+PhotonWebSocket.csproj
+PhotonUnityNetworking.Utilities.PhotonPlayer.Editor.csproj
+PhotonUnityNetworking.Utilities.Culling.Editor.csproj
+PhotonUnityNetworking.Utilities.csproj
+PhotonUnityNetworking.Editor.csproj
+PhotonUnityNetworking.csproj
+PhotonRealtime.csproj
+PhotonChat.csproj
+DotJoiner.userprefs
+DotJoiner.sln
+DotJoiner.Plugins.csproj
+DotJoiner.Editor.csproj
+DotJoiner.csproj
+Assets/UETools/
+Assets/Sounds/1.mp3
+Assets/Sounds/1.mp3.meta
+Assets/Sounds/2.mp3
+Assets/Sounds/2.mp3.meta
+Assets/Sounds/background-soun.mp3
+Assets/Sounds/background-soun.mp3.meta
+Assets/Sounds/Button-SoundBible.com-1420500901.mp3
+Assets/Sounds/Button-SoundBible.com-1420500901.mp3.meta
+Assets/Sounds/gesture.mp3
+Assets/Sounds/gesture.mp3.meta
+Assets/Sounds/Hr_gui_coin #20813.wav
+Assets/Sounds/Hr_gui_coin #20813.wav.meta
+Assets/Sounds/line-draw.mp3
+Assets/Sounds/line-draw.mp3.meta
+Assets/Sounds/notificaion.mp3
+Assets/Sounds/notificaion.mp3.meta
+Assets/Sounds/Winner Sound Effect.m4a
+Assets/Sounds/Winner Sound Effect.m4a.meta
+Assets/Sounds/winner-sound.mp3
+Assets/Sounds/winner-sound.mp3.meta
+Assets/Blink.anim
+Assets/Blink.anim.meta
+Assets/FacebookSDK.meta
+Assets/Fonts.meta
+Assets/Join The Dots - Design.meta
+Assets/loading.anim
+Assets/loading.anim.meta
+Assets/Material.meta
+Assets/Plugins.meta
+Assets/prefab.meta
+Assets/Resources.meta
+Assets/Scene.meta
+Assets/Scripts.meta
+Assets/Sounds.meta
+Assets/UETools.meta
+Assets/PlayServicesResolver.meta
