@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//
 public class CoinHandler : MonoBehaviour {
 
     public Text[] coinText;
