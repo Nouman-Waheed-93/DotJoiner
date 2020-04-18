@@ -176,11 +176,14 @@ public class GameManager : MonoBehaviour {
     
     void DecideFirstTurn()
     {
+        Debug.Log("Deciding first turn");
         if (matchMode.HaveAuthority())
         {
+            Debug.Log("Have authority dalay");
             currentPlayer = Random.Range(1, 3) == 1 ? localHumanPlayer : opponentPlayer;
             StartCoroutine(GetPlayerMove());
         }
+        Debug.Log("Below Authority Check");
     }
 
     public void CreateSingleton () {

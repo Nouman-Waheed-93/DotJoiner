@@ -1,15 +1,15 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Networking;
 
 [System.Serializable]
 public class MyIntEvent : UnityEvent<Connection>
 {
 }
 
-public class PunPlayer : NetworkBehaviour
+public class PunPlayer : MonoBehaviourPun
 {
 
     public MyIntEvent MoveMade = new MyIntEvent();
@@ -28,7 +28,7 @@ public class PunPlayer : NetworkBehaviour
             Debug.Log("Cant register");
             yield return null;
         }
-        if (!isLocalPlayer)
+        if (!photonView.IsMine)
         {
             Debug.Log("remote registered");
             ((NetworkGame)GameManager.instance.MatchMode).RegisterRemotePlayer(this);
@@ -40,31 +40,18 @@ public class PunPlayer : NetworkBehaviour
         }
     }
 
-    [Command]
-    public void CmdSetName(string name)
+    [PunRPC]
+    public void RpcSetName(string name)
     {
-        RpcSetName(name);
-    }
-
-    [ClientRpc]
-    void RpcSetName(string name)
-    {
-        if (!isLocalPlayer)
+        if (!photonView.IsMine)
             GameManager.instance.LoadOpponentName(name);
     }
-
-
-    public void MakeMove()
-    {
-        if (isServer)
-            RpcMakeMove();
-    }
-
-    [ClientRpc]
-    void RpcMakeMove() {
+    
+    [PunRPC]
+    public void RpcMakeMove() {
         Debug.Log("yahan tak to agye");
         timeOver = false;
-        if (isLocalPlayer)
+        if (photonView.IsMine)
         {
             Debug.Log("yahna bhi toh");
             StartCoroutine(MakeMoveCoroutine());
@@ -87,43 +74,33 @@ public class PunPlayer : NetworkBehaviour
 
         if (move != null)
         {
-            CmdMoveMade(move.IDNumber);
+            photonView.RPC("RpcMoveMade", RpcTarget.Others, move.IDNumber);
             Debug.Log("Sending move made rpc");
         }
     }
 
-    [RPC]
+    [PunRPC]
     public void RPCTimeOver() {
         timeOver = true;
     }
 
     public void SendChatMessage(int messageID)
     {
-        if (isLocalPlayer)
-            CmdChatMessage(messageID);
+        if (photonView.IsMine)
+            photonView.RPC("RpcChatMessage", RpcTarget.All, messageID);
     }
 
-    [ClientRpc]
+    [PunRPC]
     void RpcChatMessage(int messageID) {
-        if(!isLocalPlayer)
+        if(!photonView.IsMine)
             ChatHandler.instance.ReceiveMessage(messageID);
     }
-
-    [Command]
-    void CmdChatMessage(int messageID) {
-        RpcChatMessage(messageID);
-    }
     
-    [Command]
-    void CmdMoveMade(int connID) {
-        RpcMoveMade(connID);
-    }
-
-    [ClientRpc]
+    [PunRPC]
     void RpcMoveMade(int connID)
     {
         Connection conn = LineDotAlgorithms.FindConnectionWithID(LineDotAlgorithms.FirstDotInTheGrid, connID);
-        if (!isLocalPlayer)
+        if (!photonView.IsMine)
             VisualLineHandler.instance.CreateLine(conn.LeftUpDot, conn.RightDownDot);
         MoveMade.Invoke(conn);
     }

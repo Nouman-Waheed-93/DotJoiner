@@ -82,10 +82,11 @@ public class NetworkPlayer : Player {
     }
 
     public void RegisterPlayer(PunPlayer punPlayer) {
+        Debug.Log("Player registered");
         player = punPlayer;
         player.MoveMade.AddListener(MoveMade);
-        if (punPlayer.isLocalPlayer)
-            punPlayer.CmdSetName(name);
+        if (punPlayer.photonView.IsMine)
+            punPlayer.photonView.RPC("RpcSetName", Photon.Pun.RpcTarget.Others, name);
     }
 
     bool moveRequested;
@@ -97,7 +98,7 @@ public class NetworkPlayer : Player {
         {
             move = null;
             Debug.Log("Move krna yao " + name);
-            player.MakeMove();
+            player.photonView.RPC("RpcMakeMove", Photon.Pun.RpcTarget.All);
             moveRequested = true;
         }
         if (move != null)

@@ -8,8 +8,8 @@ public class NetworkGame : IGameType {
 
     public bool HaveAuthority()
     {
-        Debug.Log("On server " + UnityEngine.Networking.NetworkServer.active);
-        return UnityEngine.Networking.NetworkServer.active;
+        Debug.Log("On server " + Photon.Pun.PhotonNetwork.IsMasterClient);
+        return Photon.Pun.PhotonNetwork.IsMasterClient;
     }
     
     public Player CreateOpponent()
