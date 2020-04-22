@@ -73,13 +73,11 @@ public class GameManager : MonoBehaviour {
 
     public virtual IEnumerator GetPlayerMove()
     {
-        Debug.Log("Meve len aye an");
         Connection move = null;
         do
         {
             yield return null;
             move = currentPlayer.MakeMove();
-            Debug.Log("Ethy ge an phass");
         } while (move == null /*&& Timer.instance.TickTimer()*/); // Is the player still playing its turn? has the timer run out?
         
         Timer.instance.Reset();
@@ -125,8 +123,12 @@ public class GameManager : MonoBehaviour {
         else
         {
             currentPlayer = localHumanPlayer;
-            playerTurnMsg.ShowMessage();
         }
+    }
+
+    public void ShowYourTurnMsg()
+    {
+        playerTurnMsg.ShowMessage();
     }
 
     public bool CheckBoxesMadeThisMove(Connection move)

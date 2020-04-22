@@ -14,9 +14,7 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
     private ulong currentMatchId;
 
     bool _isMatchmaking, _disconnectServer;
-
-    public bool isServer;
-
+    
     private void Start()
     {
         instance = this;
@@ -254,24 +252,21 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
     public override void OnConnected()
     {
         NMenus.MainMenu.instance.ToBetScreen();
-        Debug.Log("Yahan aye hen janab");
     }
 
     public override void OnConnectedToMaster()
     {
         NMenus.MainMenu.instance.ToBetScreen();
-        Debug.Log("Yahan aye hen janab");
     }
     
     public override void OnJoinedRoom()
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
-            Debug.Log("Hamo b jayen ge sath me");
             CoinHandler.instance.makeCoinTransaction(-currBetAmount);
             MatchMakingScreen.instance.MatchMade("", currBetAmount * 2);
             PhotonNetwork.Instantiate("PUNPlayer", Vector3.zero, Quaternion.identity, 0);
-            photonView.RPC("RPCStartGame", RpcTarget.Others);
+            photonView.RPC("RPCStartGame", RpcTarget.OthersBuffered);
         }
     }
 
@@ -287,14 +282,8 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.CreateRoom(currBetAmount.ToString());
     }
-
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        throw new System.NotImplementedException();
-    }
-
+    
     public override void OnLeftRoom()
     {
-        throw new System.NotImplementedException();
     }
 }

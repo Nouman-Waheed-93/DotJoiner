@@ -86,19 +86,17 @@ public class NetworkPlayer : Player {
         player = punPlayer;
         player.MoveMade.AddListener(MoveMade);
         if (punPlayer.photonView.IsMine)
-            punPlayer.photonView.RPC("RpcSetName", Photon.Pun.RpcTarget.Others, name);
+            punPlayer.photonView.RPC("RpcSetName", Photon.Pun.RpcTarget.OthersBuffered, name);
     }
 
     bool moveRequested;
 
     public override Connection MakeMove()
     {
-        Debug.Log("Player khali ae " + (player == null).ToString() + " move requete " + moveRequested.ToString());
         if (player && !moveRequested)
         {
             move = null;
-            Debug.Log("Move krna yao " + name);
-            player.photonView.RPC("RpcMakeMove", Photon.Pun.RpcTarget.All);
+            player.photonView.RPC("RpcMakeMove", Photon.Pun.RpcTarget.AllBuffered);
             moveRequested = true;
         }
         if (move != null)
@@ -110,7 +108,7 @@ public class NetworkPlayer : Player {
 
     public void MoveMade(Connection move) {
         this.move = move;
-        if (!NetworkGameHandler.instance.isServer)
+        if (!Photon.Pun.PhotonNetwork.IsMasterClient)
         {
             GameManager.instance.CurrentPlayer = this;
             GameManager.instance.CheckBoxesMadeThisMove(move);

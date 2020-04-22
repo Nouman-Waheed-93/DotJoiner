@@ -49,11 +49,10 @@ public class PunPlayer : MonoBehaviourPun
     
     [PunRPC]
     public void RpcMakeMove() {
-        Debug.Log("yahan tak to agye");
         timeOver = false;
         if (photonView.IsMine)
         {
-            Debug.Log("yahna bhi toh");
+            GameManager.instance.ShowYourTurnMsg();
             StartCoroutine(MakeMoveCoroutine());
         }
     }
@@ -74,7 +73,7 @@ public class PunPlayer : MonoBehaviourPun
 
         if (move != null)
         {
-            photonView.RPC("RpcMoveMade", RpcTarget.Others, move.IDNumber);
+            photonView.RPC("RpcMoveMade", RpcTarget.AllBuffered, move.IDNumber);
             Debug.Log("Sending move made rpc");
         }
     }

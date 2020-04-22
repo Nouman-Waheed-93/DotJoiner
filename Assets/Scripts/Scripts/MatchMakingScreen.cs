@@ -21,14 +21,16 @@ public class MatchMakingScreen : MonoBehaviour {
 
     public void MatchMade(string opponentName, int betAmount) {
         opponentNameTxt.text = opponentName;
-        StartCoroutine("StartMatch", betAmount);
-    }
-
-    IEnumerator StartMatch(int betAmount) {
-        yield return null;
         NMenus.MainMenu.instance.OnGameLevelLoaded();
         GameManager.instance.StartOnlineGame(betAmount);
+//        StartCoroutine("StartMatch", betAmount);
     }
+
+    //IEnumerator StartMatch(int betAmount) {
+    //    yield return null;
+    //    NMenus.MainMenu.instance.OnGameLevelLoaded();
+    //    GameManager.instance.StartOnlineGame(betAmount);
+    //}
 
     public void StopMatchMaking()
     {
