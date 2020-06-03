@@ -11,7 +11,8 @@ namespace NMenus
         public static MainMenu instance;
         [SerializeField]
         private GameObject menuParent, mainMenuGO, BetScreen, matchMakingScreen, ResultGO, SettingsScreenGO, LoadingScreen,
-            InGame, FreeCoinsScreenGO, NotEnoughCoinGO, InviteFriendsGO, profileScreenGO, comingSoonGO, rewardGO;
+            InGame, FreeCoinsScreenGO, NotEnoughCoinGO, InviteFriendsGO, profileScreenGO, comingSoonGO, rewardGO, FBLoginNot,
+            FriendList;
         [SerializeField]
         private string moregamesLink, thisGameLink;
 
@@ -57,6 +58,16 @@ namespace NMenus
 
         public void ToBetScreen() {
             TransitionToScreen(BetScreen);
+        }
+
+        public void ToFriendList()
+        {
+            TransitionToScreen(FriendList);
+        }
+
+        public void ShowFBLoginNotification()
+        {
+            FBLoginNot.SetActive(true);
         }
 
         public void ToSettings() {

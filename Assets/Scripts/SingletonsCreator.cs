@@ -8,6 +8,7 @@ public class SingletonsCreator : MonoBehaviour {
     public ChatHandler chatHandler;
     public GameManager gameManager;
     public Settings settings;
+    public BetScreen betScreen;
     public int notifArrSize;
 
 	// Use this for initialization
@@ -17,6 +18,7 @@ public class SingletonsCreator : MonoBehaviour {
             playerProfile.CreateSingleton();
             chatHandler.CreateSingleton();
             gameManager.CreateSingleton();
+            betScreen.CreateSingleton();
             settings.CreateSingleton();
             settings.LoadSettings();
             new NotificationHandler(notifArrSize);

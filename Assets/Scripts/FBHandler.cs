@@ -9,7 +9,7 @@ using System;
 
 public class FBHandler : MonoBehaviour {
 
-    private static readonly List<string> readPermissions = new List<string> { "public_profile", "user_friends" };
+    private static readonly List<string> readPermissions = new List<string> { "public_profile", "email", "user_friends" };
     private static readonly List<string> publishPermissions = new List<string> { "publish_actions" };
 
     public static FBHandler instance;
@@ -17,6 +17,8 @@ public class FBHandler : MonoBehaviour {
     public static UnityEvent FBPicLoaded = new UnityEvent();
     public static UnityEvent OppPicLoaded = new UnityEvent();
     public static UnityEvent FBNameLoaded = new UnityEvent();
+    public static UnityEvent FBConnected = new UnityEvent();
+    public static event Action<string> FriendsListUpdated;
 
     public int SharingRewardAmount;
     public Button LoginButton, LogoutButton;
@@ -26,6 +28,7 @@ public class FBHandler : MonoBehaviour {
     public static Sprite OpponentProfilePhoto;
     public Transform fbFriendsScreen;
     public static string UsernameTxt;
+    public static string UserIdTxt;
     // Use this for initialization
     void Start () {
         if (instance)
@@ -93,6 +96,25 @@ public class FBHandler : MonoBehaviour {
         LogoutButton.gameObject.SetActive(false);
     }
     
+    public static void GetPlayerInfo()
+    {
+        string queryString = "/me?fields=id,first_name";
+        FB.API(queryString, HttpMethod.GET, GetPlayerInfoCallback);
+    }
+
+    public static void GetEnemyProfilePhoto(string id) {
+        FB.API("/me/picture?type=square&height=512&width=512", HttpMethod.GET, ProfilePhotoCallback);
+    }
+
+    public static void EnemyProfilePhotoCallback(IGraphResult result)
+    {
+        if (result.Texture != null)
+        {
+            OpponentProfilePhoto = Sprite.Create(result.Texture, new Rect(0, 0, result.Texture.width, result.Texture.height), new Vector2(0.5f, 0.5f));
+            OppPicLoaded.Invoke();
+        }
+    }
+    
     private void OnLoginComplete()
     {
         Debug.Log("OnLoginComplete");
@@ -107,19 +129,16 @@ public class FBHandler : MonoBehaviour {
         // AccessToken class will have session details
         string aToken = AccessToken.CurrentAccessToken.TokenString;
         string facebookId = AccessToken.CurrentAccessToken.UserId;
+
         // Show loading animations
         LoginButton.gameObject.SetActive(false);
         LogoutButton.gameObject.SetActive(true);
         GetPlayerInfo();
-     
+        FBConnected.Invoke();
+        GetGameFBFriends();
     }
 
-    public static void GetPlayerInfo()
-    {
-        string queryString = "/me?fields=id,first_name";
-        FB.API(queryString, HttpMethod.GET, GetPlayerInfoCallback);
-    }
-    
+
     private static void GetPlayerInfoCallback(IGraphResult result)
     {
         Debug.Log("GetPlayerInfoCallback");
@@ -130,6 +149,11 @@ public class FBHandler : MonoBehaviour {
         }
         Debug.Log(result.RawResult);
 
+        //Save player id
+        if (result.ResultDictionary.TryGetValue("id", out UserIdTxt))
+        {
+
+        }
         // Save player name
         string name;
         if (result.ResultDictionary.TryGetValue("first_name", out name))
@@ -138,20 +162,7 @@ public class FBHandler : MonoBehaviour {
             FBNameLoaded.Invoke();
             //FB.API("/me/picture?redirect=false", HttpMethod.GET, ProfilePhotoCallback);
             FB.API("/me/picture?type=square&height=512&width=512", HttpMethod.GET, ProfilePhotoCallback);
-            
-        }
-    }
 
-    public static void GetEnemyProfilePhoto(string id) {
-        FB.API("/me/picture?type=square&height=512&width=512", HttpMethod.GET, ProfilePhotoCallback);
-    }
-
-    public static void EnemyProfilePhotoCallback(IGraphResult result)
-    {
-        if (result.Texture != null)
-        {
-            OpponentProfilePhoto = Sprite.Create(result.Texture, new Rect(0, 0, result.Texture.width, result.Texture.height), new Vector2(0.5f, 0.5f));
-            OppPicLoaded.Invoke();
         }
     }
 
@@ -223,20 +234,16 @@ Detail, new Uri(Link), "", AchievmentShared);
         ShareButton.interactable = false;
     }
 
-    //public void GetGameFBFriends()
-    //{
-    //    string query = WWW.EscapeURL("SELECT uid, name, is_app_user, pic_square FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1");
-    //    string fql = "/fql?q=" + query;
-    //    FB.API(fql, HttpMethod.GET, GetLIstOfPlayers);
-    //}
-
-    //void GetLIstOfPlayers(IGraphResult result) {
-    //    for(int i = 0; i < result.ResultDictionary.Count; i++)
-    //    {
-    //        //Instantiate FB Freind Element
-    //        FBFriendElement friend = Instantiate(Resources.Load<FBFriendElement>("FBFriendElement"), fbFriendsScreen);
-    //        friend.name = result.ResultDictionary[i].
-    //    }
-    //}
+    public void GetGameFBFriends()
+    {
+        string query = "/me/friends?fields=id,name,picture.type(square).height(512).width(512)";
+        FB.API(query, HttpMethod.GET, GetLIstOfPlayers);
+    }
+    
+    void GetLIstOfPlayers(IGraphResult result)
+    {
+        FriendsListUpdated.Invoke(result.ResultDictionary.ToJson());
+        Debug.Log("Friends frineds firn");
+    }
 
 }

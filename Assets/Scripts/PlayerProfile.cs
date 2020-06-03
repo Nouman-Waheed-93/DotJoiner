@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class PlayerProfile : MonoBehaviour {
 
@@ -17,7 +18,7 @@ public class PlayerProfile : MonoBehaviour {
 
 	void Start () {
         LoadProfile();
-        FBHandler.FBNameLoaded.AddListener(LoadFBName);
+        FBHandler.FBNameLoaded.AddListener(LoadFBNameNID);
 	}
 	
     void LoadProfile()
@@ -26,18 +27,23 @@ public class PlayerProfile : MonoBehaviour {
         playerNameField.text = GetName();
         coinTxt.text = CoinHandler.instance.GetCoinBalance().ToString();
         scoreTxt.text = "0";
-        playerID.text = "0";
+        playerID.text = GetID();
         gamesWonTxt.text = PlayerPrefs.GetInt("GamesWon", 0).ToString();
         WinPercentTxt.text = ((float)(PlayerPrefs.GetInt("GamesWon", 0) / (float)PlayerPrefs.GetInt("GamesPlayed", 1)) * 100f).ToString();
         totalGamesPlayedTxt.text = PlayerPrefs.GetInt("GamesPlayed", 0).ToString();
     }
 
-    void LoadFBName()
+    void LoadFBNameNID()
     {
         if (FBHandler.UsernameTxt != null || FBHandler.UsernameTxt != "")
         {
             playerNameField.text = FBHandler.UsernameTxt;
             SetName(FBHandler.UsernameTxt);
+        }
+        if(FBHandler.UserIdTxt != null || FBHandler.UserIdTxt != "")
+        {
+            playerID.text = FBHandler.UserIdTxt;
+            SetID(FBHandler.UserIdTxt);
         }
     }
 
@@ -49,6 +55,16 @@ public class PlayerProfile : MonoBehaviour {
     public static string GetName()
     {
         return PlayerPrefs.GetString("PlayerName", NameChoser.RandomName());
+    }
+
+    private void SetID(string id)
+    {
+        PlayerPrefs.SetString("PlayerID", id);
+    }
+
+    public static string GetID()
+    {
+        return PlayerPrefs.GetString("PlayerID", "");
     }
 
     public void GameStarted() {

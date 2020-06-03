@@ -11,9 +11,6 @@ Assets/Fonts/
 Assets/Material/
 Assets/Sprits/
 Assets/Join The Dots - Design/
-Assets/PlayServicesResolver/
-Assets/FacebookSDK/
-Assets/Plugins/
 PhotonWebSocket.csproj
 PhotonUnityNetworking.Utilities.PhotonPlayer.Editor.csproj
 PhotonUnityNetworking.Utilities.Culling.Editor.csproj

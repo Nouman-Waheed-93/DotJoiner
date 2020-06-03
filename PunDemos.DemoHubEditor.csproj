@@ -278,17 +278,17 @@
     <Reference Include="Facebook.Unity.Settings">
       <HintPath>Assets/FacebookSDK/Plugins/Settings/Facebook.Unity.Settings.dll</HintPath>
     </Reference>
-    <Reference Include="Google.IOSResolver_v1.2.95.0">
-      <HintPath>Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.95.0.dll</HintPath>
+    <Reference Include="Google.IOSResolver_v1.2.135.0">
+      <HintPath>Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.135.0.dll</HintPath>
     </Reference>
-    <Reference Include="Google.JarResolver_v1.2.95.0">
-      <HintPath>Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.95.0.dll</HintPath>
+    <Reference Include="Google.JarResolver_v1.2.135.0">
+      <HintPath>Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.135.0.dll</HintPath>
     </Reference>
     <Reference Include="Google.VersionHandler">
       <HintPath>Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll</HintPath>
     </Reference>
-    <Reference Include="Google.VersionHandlerImpl_v1.2.95.0">
-      <HintPath>Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.95.0.dll</HintPath>
+    <Reference Include="Google.VersionHandlerImpl_v1.2.135.0">
+      <HintPath>Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.135.0.dll</HintPath>
     </Reference>
     <Reference Include="Photon3Unity3D">
       <HintPath>Assets/Plugins/Photon3Unity3D.dll</HintPath>
@@ -332,6 +332,7 @@
     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoHub\Editor\PunStartup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\FacebookSDK\Plugins\Editor\Dependencies.xml" />
     <None Include="Assets\FacebookSDK\link.xml" />
     <None Include="Assets\Fonts\fonts\Lato2OFL\Lato2OFL\OFL.txt" />
     <None Include="Assets\Fonts\fonts\Lato2OFL\Lato2OFL\README.txt" />
@@ -356,7 +357,7 @@
     <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
     <None Include="Assets\Photon\PhotonUnityNetworking\link.xml" />
     <None Include="Assets\Photon\PhotonUnityNetworking\readme.txt" />
-    <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.95.0.txt" />
+    <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.135.0.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Photon3Unity3D.xml" />
     <None Include="Assets\Plugins\WebSocket\PhotonWebSocket.asmdef" />
