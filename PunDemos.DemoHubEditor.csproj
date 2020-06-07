@@ -278,6 +278,12 @@
     <Reference Include="Facebook.Unity.Settings">
       <HintPath>Assets/FacebookSDK/Plugins/Settings/Facebook.Unity.Settings.dll</HintPath>
     </Reference>
+    <Reference Include="Photon3Unity3D">
+      <HintPath>Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="Google.IOSResolver_v1.2.135.0">
       <HintPath>Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.135.0.dll</HintPath>
     </Reference>
@@ -289,12 +295,6 @@
     </Reference>
     <Reference Include="Google.VersionHandlerImpl_v1.2.135.0">
       <HintPath>Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.135.0.dll</HintPath>
-    </Reference>
-    <Reference Include="Photon3Unity3D">
-      <HintPath>Assets/Plugins/Photon3Unity3D.dll</HintPath>
-    </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/Hp1/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
@@ -339,6 +339,8 @@
     <None Include="Assets\Fonts\fonts\roboto\NOTICE.txt" />
     <None Include="Assets\Photon\PhotonChat\Code\PhotonChat.asmdef" />
     <None Include="Assets\Photon\PhotonChat\Code\changes-chat.txt" />
+    <None Include="Assets\Photon\PhotonLibs\Photon3Unity3D.xml" />
+    <None Include="Assets\Photon\PhotonLibs\WebSocket\PhotonWebSocket.asmdef" />
     <None Include="Assets\Photon\PhotonLibs\changes-library.txt" />
     <None Include="Assets\Photon\PhotonRealtime\Code\PhotonRealtime.asmdef" />
     <None Include="Assets\Photon\PhotonRealtime\Code\changes-realtime.txt" />
@@ -359,9 +361,6 @@
     <None Include="Assets\Photon\PhotonUnityNetworking\readme.txt" />
     <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.135.0.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
-    <None Include="Assets\Plugins\Photon3Unity3D.xml" />
-    <None Include="Assets\Plugins\WebSocket\PhotonWebSocket.asmdef" />
-    <None Include="Assets\Plugins\release_history.txt" />
     <None Include="Assets\UETools\Magic_Particle_Effects\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

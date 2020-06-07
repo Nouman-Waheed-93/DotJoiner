@@ -69,6 +69,15 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
         }
     }
 
+    public void AccepChallenge(string challengeID, int betAmount)
+    {
+        currBetAmount = betAmount;
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.JoinRoom(challengeID);
+        }
+    }
+
     public void StartGameWithBetAmount(int betAmount)
     {
         currBetAmount = betAmount;
@@ -102,12 +111,19 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
 
             string n = game.Name;
             Debug.Log("A game among games " + n);
+            Debug.Log(n.Substring(0, n.IndexOf('_')) +" tor");
+            Debug.Log(PlayerProfile.GetID());
             if (n.IndexOf('_') > 0 && n.Substring(0, n.IndexOf('_')) == PlayerProfile.GetID() && game.IsOpen)
             {
                 Debug.Log(game.Name + " is the game ");
-                int secondIndexOf_ = n.IndexOf('_', n.IndexOf('_', 0));
-                string challengerName = n.Substring(n.IndexOf('_') + 1, secondIndexOf_);
+                Debug.Log("Last index of _ " + n.LastIndexOf('_'));
+                int secondIndexOf_ = n.LastIndexOf('_');
+                int idLength = secondIndexOf_ - n.IndexOf('_');
+                string challengerName = n.Substring(n.IndexOf('_') + 1, idLength - 1);
+                Debug.Log(challengerName);
                 string betAmount = n.Substring(secondIndexOf_ + 1);
+                Debug.Log(betAmount + " ye lo bet");
+                NMenus.MainMenu.instance.challengePopup.Challenged(game.Name, challengerName, betAmount, AccepChallenge);
            //     this.ShowAcceptChallengeBox(challengerName);
             }
 

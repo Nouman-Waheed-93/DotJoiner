@@ -9,6 +9,7 @@ namespace NMenus
     public class MainMenu : MonoBehaviour
     {
         public static MainMenu instance;
+        public ChallengeNotification challengePopup;
         [SerializeField]
         private GameObject menuParent, mainMenuGO, BetScreen, matchMakingScreen, ResultGO, SettingsScreenGO, LoadingScreen,
             InGame, FreeCoinsScreenGO, NotEnoughCoinGO, InviteFriendsGO, profileScreenGO, comingSoonGO, rewardGO, FBLoginNot,

@@ -17,6 +17,7 @@ public class FBHandler : MonoBehaviour {
     public static UnityEvent FBPicLoaded = new UnityEvent();
     public static UnityEvent OppPicLoaded = new UnityEvent();
     public static UnityEvent FBNameLoaded = new UnityEvent();
+    public static UnityEvent FBIdLoaded = new UnityEvent();
     public static UnityEvent FBConnected = new UnityEvent();
     public static event Action<string> FriendsListUpdated;
 
@@ -152,7 +153,7 @@ public class FBHandler : MonoBehaviour {
         //Save player id
         if (result.ResultDictionary.TryGetValue("id", out UserIdTxt))
         {
-
+            FBIdLoaded.Invoke();
         }
         // Save player name
         string name;

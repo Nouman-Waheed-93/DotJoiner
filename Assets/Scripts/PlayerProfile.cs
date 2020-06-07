@@ -14,15 +14,17 @@ public class PlayerProfile : MonoBehaviour {
     public void CreateSingleton()
     {
         instance = this;
+        FBHandler.FBIdLoaded.AddListener(LoadFBID);
+        FBHandler.FBNameLoaded.AddListener(LoadFBName);
     }
 
 	void Start () {
         LoadProfile();
-        FBHandler.FBNameLoaded.AddListener(LoadFBNameNID);
 	}
 	
     void LoadProfile()
     {
+     //   LoadFBID();
      //   LoadFBName();
         playerNameField.text = GetName();
         coinTxt.text = CoinHandler.instance.GetCoinBalance().ToString();
@@ -33,17 +35,22 @@ public class PlayerProfile : MonoBehaviour {
         totalGamesPlayedTxt.text = PlayerPrefs.GetInt("GamesPlayed", 0).ToString();
     }
 
-    void LoadFBNameNID()
+    void LoadFBID()
+    {
+        Debug.Log("HOd id id id");
+        if (FBHandler.UserIdTxt != null || FBHandler.UserIdTxt != "")
+        {
+            playerID.text = FBHandler.UserIdTxt;
+            SetID(FBHandler.UserIdTxt);
+        }
+    }
+
+    void LoadFBName()
     {
         if (FBHandler.UsernameTxt != null || FBHandler.UsernameTxt != "")
         {
             playerNameField.text = FBHandler.UsernameTxt;
             SetName(FBHandler.UsernameTxt);
-        }
-        if(FBHandler.UserIdTxt != null || FBHandler.UserIdTxt != "")
-        {
-            playerID.text = FBHandler.UserIdTxt;
-            SetID(FBHandler.UserIdTxt);
         }
     }
 

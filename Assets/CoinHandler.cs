@@ -8,7 +8,7 @@ public class CoinHandler : MonoBehaviour {
 
     public Text[] coinText;
     public static CoinHandler instance;
-
+    
     public void UpdateCoinText(int amount)
     {
         string amountStr;

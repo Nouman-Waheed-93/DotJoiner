@@ -10,7 +10,7 @@ public class MatchMakingScreen : MonoBehaviour {
     public static MatchMakingScreen instance;
 
 	// Use this for initialization
-	void Awake () {
+	public void CreateSingleton () {
         instance = this;
 	}
 
