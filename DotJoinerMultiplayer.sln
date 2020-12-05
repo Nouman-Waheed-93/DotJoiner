@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotonUnityNetworking.Utili
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PunDemos.DemoSlotcarEditor", "PunDemos.DemoSlotcarEditor.csproj", "{121EF014-53E8-C1D8-8D4A-7482949F27D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotJoinerMultiplayer.Editor", "DotJoinerMultiplayer.Editor.csproj", "{77293A40-575F-D88D-AB38-B8A0C6B529A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{121EF014-53E8-C1D8-8D4A-7482949F27D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{121EF014-53E8-C1D8-8D4A-7482949F27D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{121EF014-53E8-C1D8-8D4A-7482949F27D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77293A40-575F-D88D-AB38-B8A0C6B529A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77293A40-575F-D88D-AB38-B8A0C6B529A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77293A40-575F-D88D-AB38-B8A0C6B529A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77293A40-575F-D88D-AB38-B8A0C6B529A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

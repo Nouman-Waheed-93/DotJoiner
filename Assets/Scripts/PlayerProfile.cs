@@ -18,7 +18,7 @@ public class PlayerProfile : MonoBehaviour {
         FBHandler.FBNameLoaded.AddListener(LoadFBName);
     }
 
-	void Start () {
+	void OnEnable () {
         LoadProfile();
 	}
 	
@@ -28,10 +28,10 @@ public class PlayerProfile : MonoBehaviour {
      //   LoadFBName();
         playerNameField.text = GetName();
         coinTxt.text = CoinHandler.instance.GetCoinBalance().ToString();
-        scoreTxt.text = "0";
+   //     scoreTxt.text = "0";
         playerID.text = GetID();
         gamesWonTxt.text = PlayerPrefs.GetInt("GamesWon", 0).ToString();
-        WinPercentTxt.text = ((float)(PlayerPrefs.GetInt("GamesWon", 0) / (float)PlayerPrefs.GetInt("GamesPlayed", 1)) * 100f).ToString();
+        WinPercentTxt.text = ((int)((float)(PlayerPrefs.GetInt("GamesWon", 0) / (float)PlayerPrefs.GetInt("GamesPlayed", 1)) * 100f)).ToString();
         totalGamesPlayedTxt.text = PlayerPrefs.GetInt("GamesPlayed", 0).ToString();
     }
 

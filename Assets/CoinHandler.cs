@@ -41,7 +41,6 @@ public class CoinHandler : MonoBehaviour {
 	void Start () {
         if (instance == null)
         {
-            makeCoinTransaction(100);
             instance = this;
             UpdateCoinText(GetCoinBalance());
             DontDestroyOnLoad(gameObject);
