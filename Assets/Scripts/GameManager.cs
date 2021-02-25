@@ -115,6 +115,14 @@ public class GameManager : MonoBehaviour {
   //      EndGame();
     }
 
+    public void OpponentLeft()
+    {
+        PointsHandler.AddPoints(localHumanPlayer.score);
+        PlayerProfile.instance.GameWon();
+        NMenus.InGameMenu.instance.ShowResult(localHumanPlayer.name, currGameReward.ToString());
+        CoinHandler.instance.makeCoinTransaction(currGameReward);
+        SoundHandler.instance.PlayerWon();
+    }
 
     public virtual void TogglePlayerTurn()
     {

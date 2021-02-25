@@ -39,6 +39,7 @@ public class CoinHandler : MonoBehaviour {
     }
 
 	void Start () {
+
         if (instance == null)
         {
             instance = this;

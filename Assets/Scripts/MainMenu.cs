@@ -13,7 +13,7 @@ namespace NMenus
         [SerializeField]
         private GameObject menuParent, mainMenuGO, BetScreen, matchMakingScreen, ResultGO, SettingsScreenGO, LoadingScreen,
             InGame, FreeCoinsScreenGO, NotEnoughCoinGO, InviteFriendsGO, profileScreenGO, comingSoonGO, rewardGO, FBLoginNot,
-            FriendList;
+            FriendList, networkError;
         [SerializeField]
         private string moregamesLink, thisGameLink;
 
@@ -87,6 +87,11 @@ namespace NMenus
         public void ShowNotEnoughCoinNotification()
         {
             NotEnoughCoinGO.SetActive(true);
+        }
+
+        public void ShowNetworkError()
+        {
+            networkError.gameObject.SetActive(true);
         }
 
         public void ToInviteFriendsScreen()

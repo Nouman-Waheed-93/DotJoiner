@@ -165,4 +165,20 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
     }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
+        PhotonNetwork.LeaveRoom();
+        GameManager.instance.OpponentLeft();
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        base.OnDisconnected(cause);
+        if(cause != DisconnectCause.DisconnectByClientLogic)
+        {
+            NMenus.MainMenu.instance.ShowNetworkError();
+        }
+    }
 }

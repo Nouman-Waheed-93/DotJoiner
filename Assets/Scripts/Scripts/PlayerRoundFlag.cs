@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerFlag : MonoBehaviour {
+public class PlayerRoundFlag : MonoBehaviour {
 
     private void Start()
     {
-        GetComponent<Image>().sprite = CntryFlagHandler.instance.GetFlag();
+        GetComponent<Image>().sprite = CntryFlagHandler.instance.GetRoundFlag();
         CntryFlagHandler.instance.CountryChanged.AddListener(FlagChanged);
     }
 
     void FlagChanged()
     {
-        GetComponent<Image>().sprite = CntryFlagHandler.instance.GetFlag();
+        GetComponent<Image>().sprite = CntryFlagHandler.instance.GetRoundFlag();
     }
 
 }

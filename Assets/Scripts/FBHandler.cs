@@ -33,7 +33,7 @@ public class FBHandler : MonoBehaviour {
     // Use this for initialization
     void Start () {
         if (instance)
-            Destroy(gameObject);
+            Destroy(instance);
         else
             instance = this;
         if (!FB.IsInitialized)
@@ -57,6 +57,7 @@ public class FBHandler : MonoBehaviour {
         {
             // Signal an app activation App Event
             FB.ActivateApp();
+            OnFBBClicked();
             // Continue with Facebook SDK
             // ...
         }

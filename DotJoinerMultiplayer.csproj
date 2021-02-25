@@ -426,6 +426,7 @@
     <Compile Include="Assets\Scripts\Scripts\MatchMakingScreen.cs" />
     <Compile Include="Assets\Scripts\Scripts\NetworkGameHandler.cs" />
     <Compile Include="Assets\Scripts\Scripts\PlayerFlag.cs" />
+    <Compile Include="Assets\Scripts\Scripts\PlayerRoundFlag.cs" />
     <Compile Include="Assets\Scripts\Settings.cs" />
     <Compile Include="Assets\Scripts\SingletonsCreator.cs" />
     <Compile Include="Assets\Scripts\SoundHandler.cs" />

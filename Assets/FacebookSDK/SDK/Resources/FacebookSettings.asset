@@ -15,9 +15,9 @@ MonoBehaviour:
   clientTokens:
   - 
   appIds:
-  - 940089563092002
+  - 442147216473970
   appLabels:
-  - App Name
+  - JTD
   cookie: 1
   logging: 1
   status: 1

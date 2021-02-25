@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundHandler : MonoBehaviour {
 
@@ -26,6 +27,7 @@ public class SoundHandler : MonoBehaviour {
     }
 
     public void PlayerBoxMade() {
+        Vibrate();
         PlaySoundEffect(boxMadeClip);
     }
 
@@ -35,6 +37,7 @@ public class SoundHandler : MonoBehaviour {
     }
 
     public void PlayerWon() {
+        Vibrate();
         PlaySoundEffect(wonClip);
     }
 

@@ -6,12 +6,21 @@ using UnityEngine.Events;
 
 public class CntryFlagHandler : MonoBehaviour {
 
+    [System.Serializable]
+    struct CountryData
+    {
+        public Sprite flag;
+        public Sprite roundFlag;
+        public string name;
+    }
+
     public static CntryFlagHandler instance;
-    public Sprite[] flags;
-    public string[] names;
+
     public UnityEvent CountryChanged = new UnityEvent();
     public Transform flagParent;
-    
+    [SerializeField]
+    CountryData[] countries;
+
     int selectedFlag;
     int selectedFlagInMenu;
 
@@ -37,12 +46,17 @@ public class CntryFlagHandler : MonoBehaviour {
 
     public string GetCountryName()
     {
-        return names[selectedFlag];
+        return countries[selectedFlag].name;
     }
 
-    public Sprite GetCountry()
+    public Sprite GetFlag()
     {
-        return flags[selectedFlag];
+        return countries[selectedFlag].flag;
+    }
+
+    public Sprite GetRoundFlag()
+    {
+        return countries[selectedFlag].roundFlag;
     }
 
     public int GetCountryIndex()
