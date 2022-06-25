@@ -124,7 +124,7 @@ public class FBHandler : MonoBehaviour {
         if (!FB.IsLoggedIn)
         {
             // Reenable the Login Button
-            LoginButton.interactable = false;
+            LoginButton.interactable = true;
             return;
         }
 

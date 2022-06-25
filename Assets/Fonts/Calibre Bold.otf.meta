@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 52b3878a45b065649be14d7dfade4fd7
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Calibre
+  fontNames:
+  - Calibre
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 16636cb764731fb43972728ce16fe0fd, type: 3}
+  - {fileID: 12800000, guid: 47c43718015b0254e9ddf761d8250524, type: 3}
+  - {fileID: 12800000, guid: 277307fc8e489dc4099d02fe1cf88abd, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

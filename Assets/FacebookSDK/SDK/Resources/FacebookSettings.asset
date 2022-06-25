@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -15,14 +16,15 @@ MonoBehaviour:
   clientTokens:
   - 
   appIds:
-  - 442147216473970
+  - 0940089563092002
   appLabels:
-  - JTD
+  - App Name
   cookie: 1
   logging: 1
   status: 1
   xfbml: 0
   frictionlessRequests: 1
+  androidKeystorePath: 
   iosURLSuffix: 
   appLinkSchemes:
   - list: []
