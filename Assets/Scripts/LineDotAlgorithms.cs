@@ -9,10 +9,10 @@ public static class LineDotAlgorithms {
     static Dot UpperMostLeftMostDot;
     
     public static Dot FirstDotInTheGrid{
-    get{
-    return UpperMostLeftMostDot;
+        get{
+        return UpperMostLeftMostDot;
+        }
     }
-}
 
     public static void CreateGrid(Vector2 gridSize, Transform dotParent, Transform NameLabelParent)
     {

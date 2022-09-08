@@ -79,9 +79,9 @@ public class GameManager : MonoBehaviour {
             yield return null;
             move = currentPlayer.MakeMove();
         } while (move == null /*&& Timer.instance.TickTimer()*/); // Is the player still playing its turn? has the timer run out?
-        
-        Timer.instance.Reset();
-        
+
+        Timer.instance.ResetTimer();
+
         if (!CheckBoxesMadeThisMove(move))
             TogglePlayerTurn(); //otherPlayer's turn
 
@@ -180,7 +180,8 @@ public class GameManager : MonoBehaviour {
         localHumanPlayer = matchMode.CreatePlayer();
         opponentPlayer = matchMode.CreateOpponent();
         opponentNameText.text = opponentPlayer.name;
-        
+        Timer.instance.ResetTimer();
+
         DecideFirstTurn();
     }
     

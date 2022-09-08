@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using UnityEngine.Events;
 
 public class PlayerProfile : MonoBehaviour {
 
@@ -10,7 +11,9 @@ public class PlayerProfile : MonoBehaviour {
 
     public InputField playerNameField;
     public Text coinTxt, scoreTxt, playerID, gamesWonTxt, WinPercentTxt, totalGamesPlayedTxt;
-    
+
+    public UnityEvent<string> onNameUpdated;
+
     public void CreateSingleton()
     {
         instance = this;
@@ -57,10 +60,13 @@ public class PlayerProfile : MonoBehaviour {
     public void SetName(string name)
     {
         PlayerPrefs.SetString("PlayerName", name);
+        onNameUpdated.Invoke(name);
     }
     
     public static string GetName()
     {
+        if (!PlayerPrefs.HasKey("PlayerName"))
+            instance.SetName(NameChoser.RandomName());
         return PlayerPrefs.GetString("PlayerName", NameChoser.RandomName());
     }
 

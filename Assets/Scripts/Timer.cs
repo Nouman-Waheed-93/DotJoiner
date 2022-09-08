@@ -12,18 +12,16 @@ public class Timer : MonoBehaviour {
 
     public static Timer instance;
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
         img = GetComponent<Image>();
     }
 
-    public void Reset()
+    public void ResetTimer()
     {
-
         cumMoveTime = 0;
         img.fillAmount = 1 - cumMoveTime / MoveTime;
-
     }
 
     public bool TickTimer() {

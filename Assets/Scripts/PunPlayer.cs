@@ -65,7 +65,7 @@ public class PunPlayer : MonoBehaviourPun
             move = VisualLineHandler.instance.GetHumanPlayerMove();
         } while (move == null && Timer.instance.TickTimer());
 
-        Timer.instance.Reset();
+        Timer.instance.ResetTimer();
 
         if (move == null) {
             move = AIPlayer.MakeMoveNow();
