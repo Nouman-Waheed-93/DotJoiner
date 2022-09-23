@@ -36,14 +36,14 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
 
     public void ConnectToPhoton()
     {
-        //string aToken = AccessToken.CurrentAccessToken.TokenString;
-        //string facebookId = AccessToken.CurrentAccessToken.UserId;
-        //PhotonNetwork.AuthValues = new AuthenticationValues();
-        //PhotonNetwork.AuthValues.AuthType = CustomAuthenticationType.Facebook;
-        //PhotonNetwork.AuthValues.UserId = facebookId; // alternatively set by server
-        //PhotonNetwork.AuthValues.AddAuthParameter("token", aToken);
+        string aToken = AccessToken.CurrentAccessToken.TokenString;
+        string facebookId = AccessToken.CurrentAccessToken.UserId;
+        PhotonNetwork.AuthValues = new AuthenticationValues();
+        PhotonNetwork.AuthValues.AuthType = CustomAuthenticationType.Facebook;
+        PhotonNetwork.AuthValues.UserId = facebookId; // alternatively set by server
+        PhotonNetwork.AuthValues.AddAuthParameter("token", aToken);
 
-        //PhotonNetwork.AuthValues.UserId = PlayerProfile.GetID();
+        PhotonNetwork.AuthValues.UserId = PlayerProfile.GetID();
 
         PhotonNetwork.ConnectUsingSettings();
     }

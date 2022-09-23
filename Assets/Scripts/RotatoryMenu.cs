@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class RotatoryMenu : MonoBehaviour {
     
- //   public RectTransform[] items;
     public float ShiftingDelay;
-    public Vector2[] itemPositions;
-    public Vector2 selectedSize;
-    public Vector2 unselectedSize;
     Animator anim;
-    int IndCurrSlctdItem;
     int moveLeftId, moveRightId;
     float dragStartPosX;
 
