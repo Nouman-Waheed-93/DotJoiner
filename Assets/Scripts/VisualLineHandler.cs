@@ -13,6 +13,8 @@ public class VisualLineHandler : MonoBehaviour {
     Image Templateline;
     Image currLine;
 
+    GameObject prevLine;
+
     public Transform referenceElement;
 
     GraphicRaycaster m_raycaster;
@@ -115,6 +117,10 @@ public class VisualLineHandler : MonoBehaviour {
         this.FirstDot = FirstDot;
         if (currLine != null)
             Destroy(currLine.gameObject);
+
+        if (prevLine != null)
+            prevLine.GetComponent<Animator>().SetBool("blink", false);
+
         CreateVisualLineOnPivot(FirstDot);
         
         currLine.rectTransform.sizeDelta =
@@ -152,9 +158,10 @@ public class VisualLineHandler : MonoBehaviour {
 
         if (currLine != null)
         {
-            currLine.GetComponent<Animator>().SetTrigger("blink");
+            currLine.GetComponent<Animator>().SetBool("blink", true);
             SoundHandler.instance.LineMade();
         }
+        prevLine = currLine.gameObject;
         currLine = null;
         this.FirstDot = null;
         return connectionMade;
