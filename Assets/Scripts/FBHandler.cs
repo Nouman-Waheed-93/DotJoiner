@@ -18,11 +18,13 @@ public class FBHandler : MonoBehaviour {
     public static UnityEvent OppPicLoaded = new UnityEvent();
     public static UnityEvent FBNameLoaded = new UnityEvent();
     public static UnityEvent FBIdLoaded = new UnityEvent();
-    public static UnityEvent FBConnected = new UnityEvent();
+    public static UnityEvent OnFBLoginSuccess = new UnityEvent();
+    public static UnityEvent OnFBLoginInitiated = new UnityEvent();
+    public static UnityEvent OnFBLoginFailed = new UnityEvent();
+    public static UnityEvent OnFBLogout = new UnityEvent();
     public static event Action<string> FriendsListUpdated;
 
     public int SharingRewardAmount;
-    public Button LoginButton, LogoutButton;
     public Button ShareButton;
   //  public GameObject PlayerLoggedINUI;
     public static Sprite FBProfilePhoto;
@@ -30,12 +32,18 @@ public class FBHandler : MonoBehaviour {
     public Transform fbFriendsScreen;
     public static string UsernameTxt;
     public static string UserIdTxt;
-    // Use this for initialization
-    void Start () {
+
+    private void Awake()
+    {
         if (instance)
             Destroy(instance);
         else
             instance = this;
+    }
+
+    // Use this for initialization
+    void Start () {
+
         if (!FB.IsInitialized)
         {
             // Initialize the Facebook SDK
@@ -43,9 +51,9 @@ public class FBHandler : MonoBehaviour {
         }
         else
         {
-            // Already initialized, signal an app activation App Event
             FB.ActivateApp();
-            OnLoginComplete();
+            // Already initialized, signal an app activation App Event
+            LoginFacebookAutomatically();
         }
         FBProfilePhoto = PictureChooser.ChoosePicture();
         OpponentProfilePhoto = PictureChooser.GetRandomPic();
@@ -55,11 +63,8 @@ public class FBHandler : MonoBehaviour {
     {
         if (FB.IsInitialized)
         {
-            // Signal an app activation App Event
             FB.ActivateApp();
-            OnFBBClicked();
-            // Continue with Facebook SDK
-            // ...
+            LoginFacebookAutomatically();
         }
         else
         {
@@ -67,35 +72,44 @@ public class FBHandler : MonoBehaviour {
         }
     }
     
-    public void OnFBBClicked() {
-        FB.LogInWithReadPermissions(readPermissions, delegate (ILoginResult result)
+    public void OnFBButtonClicked() {
+        OnFBLoginInitiated?.Invoke();
+        if (FB.IsInitialized)
         {
-            LoginButton.interactable = false;
-            Debug.Log("LoginCallback");
+            LoginFacebook();
+        }
+        else
+        {
+            FB.Init(InitCallbackWithLogin);
+        }
+    }
+
+    private void InitCallbackWithLogin()
+    {
+        if (FB.IsInitialized)
+        {
+            FB.ActivateApp();
             if (FB.IsLoggedIn)
             {
-                Debug.Log("Donee od");
+                FB.Mobile.RefreshCurrentAccessToken((IAccessTokenRefreshResult result) => {
+                    OnLoginComplete();
+                });
             }
             else
             {
-                if (result.Error != null)
-                {
-                    Debug.LogError(result.Error);
-                }
-                Debug.Log("Not Logged In");
+                LoginFacebook();
             }
-         
-                OnLoginComplete();
-            
-        });
+        }
+        else
+        {
+            OnFBLoginFailed?.Invoke();
+        }
     }
 
     public void OnLogOutClicked()
     {
         FB.LogOut();
-        LoginButton.gameObject.SetActive(true);
-        LoginButton.interactable = true;
-        LogoutButton.gameObject.SetActive(false);
+        OnFBLogout?.Invoke();
     }
     
     public static void GetPlayerInfo()
@@ -124,7 +138,7 @@ public class FBHandler : MonoBehaviour {
         if (!FB.IsLoggedIn)
         {
             // Reenable the Login Button
-            LoginButton.interactable = true;
+            OnFBLoginFailed?.Invoke();
             return;
         }
 
@@ -133,13 +147,10 @@ public class FBHandler : MonoBehaviour {
         string facebookId = AccessToken.CurrentAccessToken.UserId;
 
         // Show loading animations
-        LoginButton.gameObject.SetActive(false);
-        LogoutButton.gameObject.SetActive(true);
         GetPlayerInfo();
-        FBConnected.Invoke();
+        OnFBLoginSuccess?.Invoke();
         GetGameFBFriends();
     }
-
 
     private static void GetPlayerInfoCallback(IGraphResult result)
     {
@@ -232,7 +243,6 @@ Detail, new Uri(Link), "", AchievmentShared);
         }
         CoinHandler.instance.makeCoinTransaction(SharingRewardAmount);
         Debug.Log("We were successful");
-     //   PlayerPrefs.SetInt(GlobalVals.Credits, PlayerPrefs.GetInt(GlobalVals.Credits, 0) + 20);
         ShareButton.interactable = false;
     }
 
@@ -248,4 +258,34 @@ Detail, new Uri(Link), "", AchievmentShared);
         Debug.Log("Friends frineds firn");
     }
 
+    private void LoginFacebookAutomatically()
+    {
+        if (FB.IsLoggedIn)
+        {
+            FB.Mobile.RefreshCurrentAccessToken((IAccessTokenRefreshResult result)=> {
+                OnLoginComplete();
+            });
+        }
+    }
+
+    private void LoginFacebook()
+    {
+        FB.LogInWithReadPermissions(readPermissions, delegate (ILoginResult result)
+        {
+            Debug.Log("LoginCallback");
+            if (FB.IsLoggedIn)
+            {
+                OnLoginComplete();
+            }
+            else
+            {
+                if (result.Error != null)
+                {
+                    Debug.LogError(result.Error);
+                }
+                Debug.Log("Not Logged In");
+                OnFBLoginFailed?.Invoke();
+            }
+        });
+    }
 }

@@ -20,7 +20,7 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
     private void Awake()
     {
         instance = this;
-        FBHandler.FBConnected.AddListener(ConnectToPhoton);
+        FBHandler.OnFBLoginSuccess.AddListener(ConnectToPhoton);
     }
 
     public void PlayWithFriends()

@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour {
     public void StartOnlineGame(int reward) {
         currGameReward = reward;
         matchMode = new NetworkGame();
+        PlayerProfile.instance.GameStarted();
         PrepareTheGround();
      }
 
@@ -57,7 +58,8 @@ public class GameManager : MonoBehaviour {
 
     public void CurrentPlayerMadeABox(Dot boxLRDot)
     {
-        boxLRDot.PlayerLetterText.text = currentPlayer.name.Substring(0, 1);
+        boxLRDot.PlayerLetterText.color = DecideColor();
+        boxLRDot.PlayerLetterText.text = currentPlayer.initial.ToString();
         currentPlayer.score += perBoxPoints;
         boxesMade++;
         Debug.Log("Boxes made " + boxesMade + " total boxes " + totalBoxes);
@@ -94,10 +96,14 @@ public class GameManager : MonoBehaviour {
 
     public virtual void DeclareWinner()
     {
-        PointsHandler.AddPoints(localHumanPlayer.score);
+        bool playedOnline = matchMode.GetType() == typeof(NetworkGame);
+        if (playedOnline)
+            PointsHandler.AddPoints(localHumanPlayer.score);
+        
         if (localHumanPlayer.score > opponentPlayer.score)
         {
-            PlayerProfile.instance.GameWon();
+            if(playedOnline)
+                PlayerProfile.instance.GameWon();
             NMenus.InGameMenu.instance.ShowResult(localHumanPlayer.name, currGameReward.ToString());
             CoinHandler.instance.makeCoinTransaction(currGameReward);
             SoundHandler.instance.PlayerWon();
@@ -173,7 +179,6 @@ public class GameManager : MonoBehaviour {
     }
 
     void PrepareTheGround() {
-        PlayerProfile.instance.GameStarted();
         LineDotAlgorithms.CreateGrid(gridSize, transform, nameLabels);
         totalBoxes = (int)((gridSize.x - 1) * (gridSize.y - 1));
         boxesMade = 0;
@@ -217,5 +222,17 @@ public class GameManager : MonoBehaviour {
         }
         VisualLineHandler.instance.DestroyAllLines();
         matchMode = null;
+    }
+
+    private Color DecideColor()
+    {
+        Color color = Color.white;
+        if (localHumanPlayer.initial == opponentPlayer.initial)
+            if (currentPlayer == localHumanPlayer)
+                color = Color.Lerp(Color.white, Color.blue, 0.3f);
+            else
+                color = Color.Lerp(Color.white, Color.red, 0.3f);
+
+        return color;
     }
 }

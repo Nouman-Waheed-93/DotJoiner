@@ -6,11 +6,12 @@ using UnityEngine.Networking;
 public abstract class Player {
 
     public string name;
-
+    public char initial;
     public int score;
 
     public Player(string name) {
         this.name = name;
+        this.initial = name.ToCharArray()[0];
     }
 
     public abstract Connection MakeMove();

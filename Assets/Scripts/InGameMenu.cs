@@ -12,6 +12,7 @@ namespace NMenus
         public GameObject notificationGO;
         public GameObject ResultGO;
         public GameObject FailedGO;
+        public GameObject rewardGO;
         [SerializeField]
         private Text winnerNameTxt, rewardText;
 
@@ -33,6 +34,8 @@ namespace NMenus
         public void ShowResult(string winnerName, string reward)
         {
             ResultGO.SetActive(true);
+            rewardText.gameObject.SetActive(reward != "0");
+            rewardGO.SetActive(rewardText.gameObject.activeSelf);
             rewardText.text = reward;
             winnerNameTxt.text = winnerName;
         }

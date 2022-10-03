@@ -1707,6 +1707,7 @@ GameObject:
   - component: {fileID: 47769056}
   - component: {fileID: 47769055}
   - component: {fileID: 47769057}
+  - component: {fileID: 47769058}
   m_Layer: 5
   m_Name: FBLogOut
   m_TagString: Untagged
@@ -1839,6 +1840,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &47769058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47769053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0cf4309d5f3784a9e9fb8ef93e2dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableOnLogin: 1
 --- !u!1 &49366744
 GameObject:
   m_ObjectHideFlags: 0
@@ -6868,6 +6882,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 250978985}
   m_CullTransparentMesh: 1
+--- !u!1 &252723069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 252723071}
+  - component: {fileID: 252723070}
+  m_Layer: 0
+  m_Name: FBEventsPropogator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &252723070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252723069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b8ecfe3f715f442ac33b3b6cbd0e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loginHandlersGO:
+  - {fileID: 699521386}
+  - {fileID: 47769053}
+  - {fileID: 2079759179}
+--- !u!4 &252723071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252723069}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 346.85556, y: 182.20352, z: -8.270254}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &256160376
 GameObject:
   m_ObjectHideFlags: 0
@@ -7578,8 +7639,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SharingRewardAmount: 50
-  LoginButton: {fileID: 699521388}
-  LogoutButton: {fileID: 47769057}
   ShareButton: {fileID: 1675683610}
   fbFriendsScreen: {fileID: 0}
 --- !u!114 &278899042
@@ -15863,6 +15922,8 @@ GameObject:
   - component: {fileID: 699521390}
   - component: {fileID: 699521389}
   - component: {fileID: 699521388}
+  - component: {fileID: 699521392}
+  - component: {fileID: 699521391}
   m_Layer: 5
   m_Name: FBLoginBtn
   m_TagString: Untagged
@@ -15934,8 +15995,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 278899041}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnFBBClicked
+        m_TargetAssemblyTypeName: FBHandler, Assembly-CSharp
+        m_MethodName: OnFBButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15995,6 +16056,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699521386}
   m_CullTransparentMesh: 1
+--- !u!114 &699521391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699521386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d04b35423f68184ebd5723106dc44a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &699521392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699521386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0cf4309d5f3784a9e9fb8ef93e2dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableOnLogin: 0
 --- !u!1 &706816061
 GameObject:
   m_ObjectHideFlags: 0
@@ -39468,6 +39554,7 @@ MonoBehaviour:
   notificationGO: {fileID: 0}
   ResultGO: {fileID: 1155049546}
   FailedGO: {fileID: 500824728}
+  rewardGO: {fileID: 1042165645}
   winnerNameTxt: {fileID: 1869858381}
   rewardText: {fileID: 404825053}
 --- !u!1 &1772314969
@@ -43560,7 +43647,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 50
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
@@ -45966,6 +46053,7 @@ GameObject:
   - component: {fileID: 2079759183}
   - component: {fileID: 2079759182}
   - component: {fileID: 2079759181}
+  - component: {fileID: 2079759184}
   m_Layer: 5
   m_Name: FBLoginBtn
   m_TagString: Untagged
@@ -46049,8 +46137,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 278899041}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnFBBClicked
+        m_TargetAssemblyTypeName: FBHandler, Assembly-CSharp
+        m_MethodName: OnFBButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -46098,6 +46186,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079759179}
   m_CullTransparentMesh: 1
+--- !u!114 &2079759184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079759179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d04b35423f68184ebd5723106dc44a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2082218332
 GameObject:
   m_ObjectHideFlags: 0
