@@ -133,8 +133,6 @@ public class FBHandler : MonoBehaviour {
     
     private void OnLoginComplete()
     {
-        Debug.Log("OnLoginComplete");
-
         if (!FB.IsLoggedIn)
         {
             // Reenable the Login Button
@@ -145,6 +143,14 @@ public class FBHandler : MonoBehaviour {
         // AccessToken class will have session details
         string aToken = AccessToken.CurrentAccessToken.TokenString;
         string facebookId = AccessToken.CurrentAccessToken.UserId;
+
+        string loginReward = "LoginReward";
+
+        if (!PlayerPrefs.HasKey(loginReward))
+        {
+            PlayerPrefs.SetString(loginReward, "set");
+            CoinHandler.instance.makeCoinTransaction(200);
+        }
 
         // Show loading animations
         GetPlayerInfo();
