@@ -128,6 +128,55 @@ public static class LineDotAlgorithms {
         return null;
     }
 
+    public static Move GetARandomMove(Dot dot)
+    {
+        Move rightSideMove = null;
+        if (dot.right != null)
+        {
+            Move move1 = null;
+            if (!dot.right.IsConnected())
+            {
+                move1 = new Move();
+                move1.connection = dot.right;
+            }
+            Move move2 = GetARandomMove(dot.right.RightDownDot);
+            if (move1 != null && move2 != null)
+                rightSideMove = Random.Range(0, 2) == 0 ? move1 : move2;
+            else if (move1 != null)
+                rightSideMove = move1;
+            else if (move2 != null)
+                rightSideMove = move2;
+        }
+
+        Move downSideMove = null;
+        if (dot.down != null)
+        {
+            Move move1 = null;
+            if (!dot.down.IsConnected())
+            {
+                move1 = new Move();
+                move1.connection = dot.down;
+            }
+            Move move2 = GetARandomMove(dot.down.RightDownDot);
+            if (move1 != null && move2 != null)
+                downSideMove = Random.Range(0, 2) == 0 ? move1 : move2;
+            else if (move1 != null)
+                downSideMove = move1;
+            else if (move2 != null)
+                downSideMove = move2;
+        }
+
+        if (rightSideMove != null && downSideMove != null)
+        {
+            return Random.Range(0, 2) == 0 ? downSideMove : rightSideMove;
+        }
+        else if (rightSideMove != null)
+            return rightSideMove;
+        else if (downSideMove != null)
+            return downSideMove;
+        return null;
+    }
+
     public static Connection GetOpponentBestMove(Connection move, Dot BRDot) {
         if (BRDot.left != null && !BRDot.left.IsConnected() && !movesMadeInChain.Contains(BRDot.left) && BRDot.left != move)
             return BRDot.left;

@@ -27,7 +27,14 @@ public class HumanPlayer : Player {
     {
         if (Timer.instance.TickTimer())
             return VisualLineHandler.instance.GetHumanPlayerMove();
-        return AIPlayer.MakeMoveNow();
+        return MakeRandomMove();
+    }
+
+    private Connection MakeRandomMove()
+    {
+        Move bestMove = LineDotAlgorithms.GetARandomMove(LineDotAlgorithms.FirstDotInTheGrid);
+        VisualLineHandler.instance.CreateLine(bestMove.connection.LeftUpDot, bestMove.connection.RightDownDot);
+        return bestMove.connection;
     }
 
     public override void GiveMessage(int messageID)
