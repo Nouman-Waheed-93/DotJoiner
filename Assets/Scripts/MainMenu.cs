@@ -12,8 +12,8 @@ namespace NMenus
         public ChallengeNotification challengePopup;
         [SerializeField]
         private GameObject menuParent, mainMenuGO, BetScreen, matchMakingScreen, ResultGO, SettingsScreenGO, LoadingScreen,
-            InGame, FreeCoinsScreenGO, NotEnoughCoinGO, InviteFriendsGO, profileScreenGO, comingSoonGO, rewardGO, FBLoginNot,
-            FriendList, networkError;
+            InGame, FreeCoinsScreenGO, NotEnoughCoinGO, InviteFriendsGO, profileScreenGO, comingSoonGO, rewardGO, FBLoginNotification,
+            FriendList, networkError, NotLoggedInMessage;
         [SerializeField]
         private string moregamesLink, thisGameLink;
 
@@ -29,6 +29,7 @@ namespace NMenus
                 instance = this;
                 InGame.SetActive(false);
                 DontDestroyOnLoad(gameObject);
+                StartCoroutine(ShowLogInMessage());
             }
             else
                 Destroy(gameObject);
@@ -52,6 +53,31 @@ namespace NMenus
             //            TransitionToScreen(mainMenuGO);
         }
 
+        IEnumerator ShowLogInMessage()
+        {
+            while (!FBHandler.instance.HasInitFailed() && !FBHandler.instance.IsInitialized()) 
+            {
+                yield return null;
+                //remove debug code below
+                Debug.Log("Stuck here"); 
+            }
+
+            if (FBHandler.instance.HasInitFailed())
+                Debug.Log("Init failed");
+            if (FBHandler.instance.IsInitialized())
+                Debug.Log("Init done");
+
+            if (FBHandler.instance.IsInitialized())
+            {
+                if (!FBHandler.instance.IsLoggedIn())
+                {
+                    NotLoggedInMessage.SetActive(true);
+                    NotLoggedInMessage.transform.Find("CrossBtn").GetComponent<Button>().onClick.AddListener(ShowProfileScreenOnCross);
+                }
+            }
+            Debug.Log("All done here");
+        }
+
         public void ToRewardScreen()
         {
             rewardGO.SetActive(true);
@@ -68,7 +94,7 @@ namespace NMenus
 
         public void ShowFBLoginNotification()
         {
-            FBLoginNot.SetActive(true);
+            FBLoginNotification.SetActive(true);
         }
 
         public void ToSettings() {
@@ -141,5 +167,11 @@ namespace NMenus
             print(state + " sound");
         }
 
+
+        private void ShowProfileScreenOnCross()
+        {
+            profileScreenGO.SetActive(true);
+            NotLoggedInMessage.transform.Find("CrossBtn").GetComponent<Button>().onClick.RemoveListener(ShowProfileScreenOnCross);
+        }
     }
 }

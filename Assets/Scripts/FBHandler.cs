@@ -33,6 +33,8 @@ public class FBHandler : MonoBehaviour {
     public static string UsernameTxt;
     public static string UserIdTxt;
 
+    private bool hasInitializationFailed;
+
     private void Awake()
     {
         if (instance)
@@ -69,6 +71,7 @@ public class FBHandler : MonoBehaviour {
         else
         {
             Debug.Log("Failed to Initialize the Facebook SDK");
+            hasInitializationFailed = true;
         }
     }
     
@@ -131,6 +134,21 @@ public class FBHandler : MonoBehaviour {
         }
     }
     
+    public bool IsInitialized()
+    {
+        return FB.IsInitialized;
+    }
+
+    public bool HasInitFailed()
+    {
+        return hasInitializationFailed;
+    }
+
+    public bool IsLoggedIn()
+    {
+        return FB.IsLoggedIn;
+    }
+
     private void OnLoginComplete()
     {
         if (!FB.IsLoggedIn)
@@ -294,4 +312,5 @@ Detail, new Uri(Link), "", AchievmentShared);
             }
         });
     }
+
 }

@@ -178,7 +178,9 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
         base.OnDisconnected(cause);
         if(cause != DisconnectCause.DisconnectByClientLogic)
         {
-            NMenus.MainMenu.instance.ShowNetworkError();
+            if(GameManager.instance.MatchMode != null &&
+                GameManager.instance.MatchMode.GetType() != typeof(OfflineGame))
+                NMenus.MainMenu.instance.ShowNetworkError();
         }
     }
 }

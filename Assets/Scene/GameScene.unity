@@ -5974,8 +5974,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 278899041}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnFBBClicked
+        m_TargetAssemblyTypeName: FBHandler, Assembly-CSharp
+        m_MethodName: OnFBButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7618,9 +7618,10 @@ MonoBehaviour:
   profileScreenGO: {fileID: 39657407}
   comingSoonGO: {fileID: 828302121}
   rewardGO: {fileID: 1990641093}
-  FBLoginNot: {fileID: 349226611}
+  FBLoginNotification: {fileID: 349226611}
   FriendList: {fileID: 455176932}
   networkError: {fileID: 1774041674}
+  NotLoggedInMessage: {fileID: 0}
   moregamesLink: 
   thisGameLink: 
   ComingSoonScreenTime: 10
@@ -34157,7 +34158,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 217816470}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.23221155
+  m_Size: 0.23221156
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
