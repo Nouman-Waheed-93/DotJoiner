@@ -13,7 +13,7 @@ namespace NMenus
         [SerializeField]
         private GameObject menuParent, mainMenuGO, BetScreen, matchMakingScreen, ResultGO, SettingsScreenGO, LoadingScreen,
             InGame, FreeCoinsScreenGO, NotEnoughCoinGO, InviteFriendsGO, profileScreenGO, comingSoonGO, rewardGO, FBLoginNotification,
-            FriendList, networkError, NotLoggedInMessage;
+            FriendList, networkError;
         [SerializeField]
         private string moregamesLink, thisGameLink;
 
@@ -55,27 +55,20 @@ namespace NMenus
 
         IEnumerator ShowLogInMessage()
         {
+            ShowLoadingScreen();
             while (!FBHandler.instance.HasInitFailed() && !FBHandler.instance.IsInitialized()) 
-            {
                 yield return null;
-                //remove debug code below
-                Debug.Log("Stuck here"); 
-            }
-
-            if (FBHandler.instance.HasInitFailed())
-                Debug.Log("Init failed");
-            if (FBHandler.instance.IsInitialized())
-                Debug.Log("Init done");
 
             if (FBHandler.instance.IsInitialized())
             {
                 if (!FBHandler.instance.IsLoggedIn())
                 {
-                    NotLoggedInMessage.SetActive(true);
-                    NotLoggedInMessage.transform.Find("CrossBtn").GetComponent<Button>().onClick.AddListener(ShowProfileScreenOnCross);
+                    FBLoginNotification.SetActive(true);
+                    Transform btnTransform = FBLoginNotification.transform.Find("PopUp/CrossBtn");
+                    Button btn = btnTransform.GetComponent<Button>();
+                    btn.onClick.AddListener(ShowProfileScreenOnCross);
                 }
             }
-            Debug.Log("All done here");
         }
 
         public void ToRewardScreen()
@@ -167,11 +160,13 @@ namespace NMenus
             print(state + " sound");
         }
 
-
         private void ShowProfileScreenOnCross()
         {
+            if (activeScreen)
+                activeScreen.SetActive(false);
+
             profileScreenGO.SetActive(true);
-            NotLoggedInMessage.transform.Find("CrossBtn").GetComponent<Button>().onClick.RemoveListener(ShowProfileScreenOnCross);
+            FBLoginNotification.transform.Find("PopUp/CrossBtn").GetComponent<Button>().onClick.RemoveListener(ShowProfileScreenOnCross);
         }
     }
 }

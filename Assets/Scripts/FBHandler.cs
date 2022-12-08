@@ -279,7 +279,6 @@ Detail, new Uri(Link), "", AchievmentShared);
     void GetLIstOfPlayers(IGraphResult result)
     {
         FriendsListUpdated.Invoke(result.ResultDictionary.ToJson());
-        Debug.Log("Friends frineds firn");
     }
 
     private void LoginFacebookAutomatically()

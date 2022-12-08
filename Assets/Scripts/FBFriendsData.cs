@@ -25,8 +25,7 @@ public class FBFriendsData : MonoBehaviour
     
     private void FriendsDataReceived(string data)
     {
-        StartCoroutine("LoadFriendsDataFromString",data);
-        Debug.Log("Vaat tor di");
+        StartCoroutine(nameof(LoadFriendsDataFromString),data);
     }
 
     private IEnumerator LoadFriendsDataFromString(string jsonString)

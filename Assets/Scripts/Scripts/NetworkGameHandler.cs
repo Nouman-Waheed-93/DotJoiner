@@ -25,8 +25,8 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
 
     public void PlayWithFriends()
     {
-        if (PhotonNetwork.IsConnected)
-            NMenus.MainMenu.instance.ToBetScreen();
+        if (PhotonNetwork.IsConnected && FBHandler.instance.IsLoggedIn())
+            NMenus.MainMenu.instance.ToFriendList();
         else
         {
             NMenus.MainMenu.instance.ShowFBLoginNotification();

@@ -7621,7 +7621,6 @@ MonoBehaviour:
   FBLoginNotification: {fileID: 349226611}
   FriendList: {fileID: 455176932}
   networkError: {fileID: 1774041674}
-  NotLoggedInMessage: {fileID: 0}
   moregamesLink: 
   thisGameLink: 
   ComingSoonScreenTime: 10
