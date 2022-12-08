@@ -25,13 +25,20 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
 
     public void PlayWithFriends()
     {
-        if (PhotonNetwork.IsConnected && FBHandler.instance.IsLoggedIn())
-            NMenus.MainMenu.instance.ToFriendList();
+        if (PhotonNetwork.IsConnected)
+        {
+            if(FBHandler.instance.IsLoggedIn())
+                NMenus.MainMenu.instance.ToFriendList();
+            else
+            {
+                NMenus.MainMenu.instance.ShowFBLoginNotification();
+            }
+        }
         else
         {
-            NMenus.MainMenu.instance.ShowFBLoginNotification();
-            //    NMenus.MainMenu.instance.ShowLoadingScreen();
+            NMenus.MainMenu.instance.ShowPhotonNotConnectedError();
         }
+
     }
 
     public void ConnectToPhoton()
@@ -42,9 +49,6 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
         PhotonNetwork.AuthValues.AuthType = CustomAuthenticationType.Facebook;
         PhotonNetwork.AuthValues.UserId = facebookId; // alternatively set by server
         PhotonNetwork.AuthValues.AddAuthParameter("token", aToken);
-
-        PhotonNetwork.AuthValues.UserId = PlayerProfile.GetID();
-
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -137,7 +141,12 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         LookUpForChallenges();
     }
-    
+
+    public override void OnCustomAuthenticationFailed(string debugMessage)
+    {
+        Debug.LogErrorFormat("Error authenticating to Photon using Facebook: {0}", debugMessage);
+    }
+
     public override void OnJoinedRoom()
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2)

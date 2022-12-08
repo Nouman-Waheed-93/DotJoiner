@@ -59,6 +59,7 @@ namespace NMenus
             while (!FBHandler.instance.HasInitFailed() && !FBHandler.instance.IsInitialized()) 
                 yield return null;
 
+            LoadingScreen.SetActive(false);
             if (FBHandler.instance.IsInitialized())
             {
                 if (!FBHandler.instance.IsLoggedIn())
@@ -113,6 +114,11 @@ namespace NMenus
             networkError.gameObject.SetActive(true);
         }
 
+        public void ShowPhotonNotConnectedError()
+        {
+            throw new System.NotImplementedException("Fuck you, implement this");
+        }
+
         public void ToInviteFriendsScreen()
         {
             InviteFriendsGO.SetActive(true);
@@ -162,9 +168,6 @@ namespace NMenus
 
         private void ShowProfileScreenOnCross()
         {
-            if (activeScreen)
-                activeScreen.SetActive(false);
-
             profileScreenGO.SetActive(true);
             FBLoginNotification.transform.Find("PopUp/CrossBtn").GetComponent<Button>().onClick.RemoveListener(ShowProfileScreenOnCross);
         }
