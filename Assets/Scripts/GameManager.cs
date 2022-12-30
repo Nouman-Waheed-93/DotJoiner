@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour {
         }
         else if (localHumanPlayer.score < opponentPlayer.score)
         {
-            NMenus.InGameMenu.instance.MissionFailed();
+            NMenus.InGameMenu.instance.MissionFailed(localHumanPlayer.score);
             SoundHandler.instance.PlayerLost();
         }
         else

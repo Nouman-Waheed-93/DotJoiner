@@ -25,18 +25,20 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
 
     public void PlayWithFriends()
     {
-        if (PhotonNetwork.IsConnected)
+        if (FBHandler.instance.IsLoggedIn())
         {
-            if(FBHandler.instance.IsLoggedIn())
+            if (PhotonNetwork.IsConnected)
+            {
                 NMenus.MainMenu.instance.ToFriendList();
+            }
             else
             {
-                NMenus.MainMenu.instance.ShowFBLoginNotification();
+                NMenus.MainMenu.instance.ShowPhotonNotConnectedError();
             }
         }
         else
         {
-            NMenus.MainMenu.instance.ShowPhotonNotConnectedError();
+            NMenus.MainMenu.instance.ShowFBLoginNotification();
         }
 
     }

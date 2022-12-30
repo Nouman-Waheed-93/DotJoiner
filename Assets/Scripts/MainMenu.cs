@@ -13,7 +13,7 @@ namespace NMenus
         [SerializeField]
         private GameObject menuParent, mainMenuGO, BetScreen, matchMakingScreen, ResultGO, SettingsScreenGO, LoadingScreen,
             InGame, FreeCoinsScreenGO, NotEnoughCoinGO, InviteFriendsGO, profileScreenGO, comingSoonGO, rewardGO, FBLoginNotification,
-            FriendList, networkError;
+            FriendList, networkError, photonError;
         [SerializeField]
         private string moregamesLink, thisGameLink;
 
@@ -116,7 +116,7 @@ namespace NMenus
 
         public void ShowPhotonNotConnectedError()
         {
-            throw new System.NotImplementedException("Fuck you, implement this");
+            photonError.SetActive(true);
         }
 
         public void ToInviteFriendsScreen()

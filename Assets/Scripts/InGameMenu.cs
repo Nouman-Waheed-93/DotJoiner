@@ -14,7 +14,7 @@ namespace NMenus
         public GameObject FailedGO;
         public GameObject rewardGO;
         [SerializeField]
-        private Text winnerNameTxt, rewardText;
+        private Text winnerNameTxt, rewardText, loseScoreTxt;
 
         
         private void Start()
@@ -40,8 +40,9 @@ namespace NMenus
             winnerNameTxt.text = winnerName;
         }
 
-        public void MissionFailed()
+        public void MissionFailed(int score)
         {
+            loseScoreTxt.text = score.ToString();
             FailedGO.SetActive(true);
         }
 
