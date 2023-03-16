@@ -37,7 +37,7 @@ public class FBFriendsData : MonoBehaviour
             FBFriendCompound fbFriend = Instantiate(Resources.Load<GameObject>("FBFriend"), friendsContainer).GetComponent<FBFriendCompound>();
             yield return getImage(entry.picture.data.url);
             entry.profilePic = this.profilePic;
-            fbFriend.SetUp(entry.id, entry.name, entry.profilePic);
+            fbFriend.SetUp(i, entry.id, entry.name, entry.profilePic);
         }
         foreach(var ppp in friendsData.data)
         {

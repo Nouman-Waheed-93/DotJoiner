@@ -9,9 +9,11 @@ public class FBFriendCompound : MonoBehaviour {
     public Text nameText;
 
     private string id;
+    private int friendIndex;
 
-    public void SetUp(string id, string name, Texture2D profilePicture)
+    public void SetUp(int friendIndex, string id, string name, Texture2D profilePicture)
     {
+        this.friendIndex = friendIndex;
         this.id = id;
         nameText.text = name;
         this.profilePicture.texture = profilePicture;
@@ -19,7 +21,7 @@ public class FBFriendCompound : MonoBehaviour {
 
     public void Challenge()
     {
-        BetScreen.instance.Challenge(id);
+        BetScreen.instance.Challenge(friendIndex);
         NMenus.MainMenu.instance.ToBetScreen();
     }
 

@@ -10,6 +10,8 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
 {
 
     public static NetworkGameHandler instance;
+
+    public WaitForFriendScreen friendWaitScreen;
     
     int currBetAmount;
 
@@ -64,14 +66,15 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
         Disconnect();
     }
 
-    public void ChallengeFriend(string friendID, int betAmount)
+    public void ChallengeFriend(int friendIndex, int betAmount)
     {
         currBetAmount = betAmount;
+        string friendID = FBFriendsData.friendsData.data[friendIndex].id;
         if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.CreateRoom(friendID + "_" + PlayerProfile.GetID() + "_"+ currBetAmount.ToString());
             _isMatchmaking = true;
-            NMenus.MainMenu.instance.ToMatchMakingScreen();
+            friendWaitScreen.SetUpAndShowUp(friendIndex);
         }
     }
 
@@ -119,7 +122,7 @@ public class NetworkGameHandler : MonoBehaviourPunCallbacks
             Debug.Log("A game among games " + n);
             Debug.Log(n.Substring(0, n.IndexOf('_')) +" tor");
             Debug.Log(PlayerProfile.GetID());
-            if (n.IndexOf('_') > 0 && n.Substring(0, n.IndexOf('_')) == PlayerProfile.GetID() && game.IsOpen)
+            if (n.IndexOf('_') > 0 && n.Substring(0, n.IndexOf('_')) == PlayerProfile.GetID() && game.IsOpen && !game.RemovedFromList)
             {
                 Debug.Log(game.Name + " is the game ");
                 Debug.Log("Last index of _ " + n.LastIndexOf('_'));

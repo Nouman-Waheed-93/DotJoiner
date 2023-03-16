@@ -10,7 +10,7 @@ public class BetScreen : MonoBehaviour {
     public Text betText;
     public int[] betAmounts;
 
-    string opponent;
+    int opponentIndex;
 
     int currBetInd;
 
@@ -24,9 +24,9 @@ public class BetScreen : MonoBehaviour {
         betText.text = betAmounts[currBetInd].ToString() + " Gold";
     }
     
-    public void Challenge(string opponent)
+    public void Challenge(int opponentIndex)
     {
-        this.opponent = opponent;
+        this.opponentIndex = opponentIndex;
     }
 
     public void FindRival()
@@ -35,10 +35,10 @@ public class BetScreen : MonoBehaviour {
             NMenus.MainMenu.instance.ShowNotEnoughCoinNotification();
         else
         {
-            if (opponent == "Random")
+            if (opponentIndex == -1)
                 NetworkGameHandler.instance.StartGameWithBetAmount(betAmounts[currBetInd]);
             else
-                NetworkGameHandler.instance.ChallengeFriend(opponent, betAmounts[currBetInd]);
+                NetworkGameHandler.instance.ChallengeFriend(opponentIndex, betAmounts[currBetInd]);
         }
     }
 
